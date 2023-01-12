@@ -48,6 +48,8 @@ class AuthGate extends StatelessWidget {
           );
         }
 
+        snapshot.data!.updatePhotoURL('https://picsum.photos/200');
+
         return ProfileScreen(
           providers: providers,
           actions: [],
