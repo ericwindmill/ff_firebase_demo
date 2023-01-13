@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -23,20 +23,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthGate(),
+      routes: {
+        '/': (context) => const AuthGate(),
+      },
+      initialRoute: '/',
     );
   }
 }
 
-class AuthGate extends StatelessWidget {
+class AuthGate extends StatefulWidget {
   const AuthGate({Key? key}) : super(key: key);
 
   @override
+  State<AuthGate> createState() => _AuthGateState();
+}
+
+class _AuthGateState extends State<AuthGate> {
+  @override
   Widget build(BuildContext context) {
-    final providers = [
+    final providers = <AuthProvider>[
       GoogleProvider(
-          clientId:
-              '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com'),
+        clientId:
+            '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com',
+      ),
     ];
 
     return StreamBuilder<User?>(
@@ -48,11 +57,22 @@ class AuthGate extends StatelessWidget {
           );
         }
 
-        snapshot.data!.updatePhotoURL('https://picsum.photos/200');
-
         return ProfileScreen(
-          providers: providers,
-          actions: [],
+          providers: [],
+          appBar: AppBar(
+            backgroundColor: Colors.white10,
+            elevation: 0,
+            title: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child:
+                  Image.asset('assets/FlutterForward_Logo_Dark_Gradient.png'),
+            ),
+          ),
+          actions: [
+            SignedOutAction((context) {
+              Navigator.pushReplacementNamed(context, '/');
+            }),
+          ],
         );
       },
     );
