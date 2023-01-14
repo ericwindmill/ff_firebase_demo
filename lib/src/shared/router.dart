@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myartist/src/features/home/home.dart';
@@ -166,30 +164,23 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
               centerTitle: false,
-              title: const Text('Good morning'),
+              toolbarHeight: kToolbarHeight * 2,
               actions: const [BrightnessToggle()],
+              title: Text('Good Morning'),
+              bottom: PreferredSize(
+                preferredSize: Size(50, 25),
+                child: Text(
+                  'To see your favorite artists, please sign in.',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
             ),
-            body: SignInScreen(
-              headerBuilder: (context, constraints, shrinkOffset) {
-                return Center(
-                  child: Text(
-                    'To see your favorite artists, please sign in.',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                );
-              },
-              providers: [
-                GoogleProvider(
-                    clientId:
-                        '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com'),
-              ],
-            ),
+            body: Container(),
           );
         }
 
