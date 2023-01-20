@@ -16,10 +16,6 @@ dependencies:
   desktop_window: ^0.4.0
   dynamic_color: ^1.5.4
   english_words: ^4.0.0
-  firebase_auth: ^4.2.5
-  firebase_core: ^2.4.1
-  firebase_ui_auth: ^1.1.8
-  firebase_ui_oauth_google: ^1.0.15
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1

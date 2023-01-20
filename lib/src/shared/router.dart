@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myartist/src/features/home/home.dart';
@@ -56,33 +55,12 @@ final appRouter = GoRouter(
   routes: [
     // HomeScreen
     GoRoute(
-        path: '/',
-        pageBuilder: (context, state) => const MaterialPage<void>(
-              key: _pageKey,
-              child: AuthGate(),
-            ),
-        routes: [
-          GoRoute(
-            path: 'profile',
-            pageBuilder: (context, state) => MaterialPage<void>(
-              key: state.pageKey,
-              child: RootLayout(
-                key: _scaffoldKey,
-                currentIndex: 0,
-                child: ProfileScreen(
-                  providers: [],
-                  actions: [
-                    SignedOutAction(
-                      (context) {
-                        GoRouter.of(context).go('/');
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ]),
+      path: '/',
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        key: _pageKey,
+        child: AuthGate(),
+      ),
+    ),
 
     // PlaylistHomeScreen
     GoRoute(
