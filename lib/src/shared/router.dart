@@ -2,22 +2,19 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myartist/src/features/home/home.dart';
 
 import '../features/artists/artists.dart';
 import '../features/playlists/playlists.dart';
 import '../features/playlists/view/view.dart';
+import 'auth.dart';
 import 'providers/artists.dart';
 import 'providers/playlists.dart';
 import 'views/views.dart';
 
 const _pageKey = ValueKey('_pageKey');
-const _scaffoldKey = ValueKey('_scaffoldKey');
+const scaffoldKey = ValueKey('_scaffoldKey');
 
 final artistsProvider = ArtistsProvider();
 final playlistsProvider = PlaylistsProvider();
@@ -58,33 +55,12 @@ final appRouter = GoRouter(
   routes: [
     // HomeScreen
     GoRoute(
-        path: '/',
-        pageBuilder: (context, state) => const MaterialPage<void>(
-              key: _pageKey,
-              child: AuthGate(),
-            ),
-        routes: [
-          GoRoute(
-            path: 'profile',
-            pageBuilder: (context, state) => MaterialPage<void>(
-              key: state.pageKey,
-              child: RootLayout(
-                key: _scaffoldKey,
-                currentIndex: 0,
-                child: ProfileScreen(
-                  providers: [],
-                  actions: [
-                    SignedOutAction(
-                      (context) {
-                        GoRouter.of(context).go('/');
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ]),
+      path: '/',
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        key: _pageKey,
+        child: AuthGate(),
+      ),
+    ),
 
     // PlaylistHomeScreen
     GoRoute(
@@ -92,7 +68,7 @@ final appRouter = GoRouter(
       pageBuilder: (context, state) => const MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           currentIndex: 1,
           child: PlaylistHomeScreen(),
         ),
@@ -103,7 +79,7 @@ final appRouter = GoRouter(
           pageBuilder: (context, state) => MaterialPage<void>(
             key: state.pageKey,
             child: RootLayout(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               currentIndex: 1,
               child: PlaylistScreen(
                 playlist: playlistsProvider.getPlaylist(state.params['pid']!)!,
@@ -120,7 +96,7 @@ final appRouter = GoRouter(
       pageBuilder: (context, state) => const MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           currentIndex: 2,
           child: ArtistsScreen(),
         ),
@@ -131,7 +107,7 @@ final appRouter = GoRouter(
           pageBuilder: (context, state) => MaterialPage<void>(
             key: state.pageKey,
             child: RootLayout(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               currentIndex: 2,
               child: ArtistScreen(
                 artist: artistsProvider.getArtist(state.params['aid']!)!,
@@ -151,7 +127,7 @@ final appRouter = GoRouter(
         pageBuilder: (context, state) => MaterialPage<void>(
           key: _pageKey,
           child: RootLayout(
-            key: _scaffoldKey,
+            key: scaffoldKey,
             currentIndex: destinations.indexOf(route),
             child: const SizedBox(),
           ),
@@ -159,46 +135,3 @@ final appRouter = GoRouter(
       ),
   ],
 );
-
-class AuthGate extends StatelessWidget {
-  const AuthGate({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: false,
-              title: const Text('Good morning'),
-              actions: const [BrightnessToggle()],
-            ),
-            body: SignInScreen(
-              headerBuilder: (context, constraints, shrinkOffset) {
-                return Center(
-                  child: Text(
-                    'To see your favorite artists, please sign in.',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                );
-              },
-              providers: [
-                GoogleProvider(
-                    clientId:
-                        '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com'),
-              ],
-            ),
-          );
-        }
-
-        return RootLayout(
-          key: _scaffoldKey,
-          currentIndex: 0,
-          child: HomeScreen(),
-        );
-      },
-    );
-  }
-}
