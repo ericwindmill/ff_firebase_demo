@@ -4,17 +4,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myartist/src/features/home/home.dart';
 
 import '../features/artists/artists.dart';
 import '../features/playlists/playlists.dart';
 import '../features/playlists/view/view.dart';
+import 'auth.dart';
 import 'providers/artists.dart';
 import 'providers/playlists.dart';
 import 'views/views.dart';
 
 const _pageKey = ValueKey('_pageKey');
-const _scaffoldKey = ValueKey('_scaffoldKey');
+const scaffoldKey = ValueKey('_scaffoldKey');
 
 final artistsProvider = ArtistsProvider();
 final playlistsProvider = PlaylistsProvider();
@@ -68,7 +68,7 @@ final appRouter = GoRouter(
       pageBuilder: (context, state) => const MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           currentIndex: 1,
           child: PlaylistHomeScreen(),
         ),
@@ -79,7 +79,7 @@ final appRouter = GoRouter(
           pageBuilder: (context, state) => MaterialPage<void>(
             key: state.pageKey,
             child: RootLayout(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               currentIndex: 1,
               child: PlaylistScreen(
                 playlist: playlistsProvider.getPlaylist(state.params['pid']!)!,
@@ -96,7 +96,7 @@ final appRouter = GoRouter(
       pageBuilder: (context, state) => const MaterialPage<void>(
         key: _pageKey,
         child: RootLayout(
-          key: _scaffoldKey,
+          key: scaffoldKey,
           currentIndex: 2,
           child: ArtistsScreen(),
         ),
@@ -107,7 +107,7 @@ final appRouter = GoRouter(
           pageBuilder: (context, state) => MaterialPage<void>(
             key: state.pageKey,
             child: RootLayout(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               currentIndex: 2,
               child: ArtistScreen(
                 artist: artistsProvider.getArtist(state.params['aid']!)!,
@@ -127,7 +127,7 @@ final appRouter = GoRouter(
         pageBuilder: (context, state) => MaterialPage<void>(
           key: _pageKey,
           child: RootLayout(
-            key: _scaffoldKey,
+            key: scaffoldKey,
             currentIndex: destinations.indexOf(route),
             child: const SizedBox(),
           ),
@@ -135,39 +135,3 @@ final appRouter = GoRouter(
       ),
   ],
 );
-
-class AuthGate extends StatelessWidget {
-  const AuthGate({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: false,
-              toolbarHeight: kToolbarHeight * 2,
-              actions: const [BrightnessToggle()],
-              title: Text('Good Morning'),
-              bottom: PreferredSize(
-                preferredSize: Size(50, 25),
-                child: Text(
-                  'To see your favorite artists, please sign in.',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            body: Container(),
-          );
-        }
-
-        return RootLayout(
-          key: _scaffoldKey,
-          currentIndex: 0,
-          child: HomeScreen(),
-        );
-      },
-    );
-  }
-}
