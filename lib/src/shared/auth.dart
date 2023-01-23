@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../features/home/home.dart';
+import 'auth_gate_highlight.dart';
 import 'router.dart';
 import 'views/views.dart';
 
@@ -18,15 +19,15 @@ class AuthGate extends StatelessWidget {
               toolbarHeight: kToolbarHeight * 2,
               actions: const [BrightnessToggle()],
               title: Text('Good Morning'),
-              bottom: PreferredSize(
-                preferredSize: Size(50, 25),
-                child: Text(
-                  'To see your favorite artists, please sign in.',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
             ),
-            body: Container(),
+            body: Column(
+              children: [
+                AuthGuardHighlight(),
+                Flexible(
+                  child: Container(),
+                ),
+              ],
+            ),
           );
         }
 
