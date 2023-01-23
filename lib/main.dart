@@ -8,11 +8,6 @@ import 'package:universal_platform/universal_platform.dart';
 
 import 'src/shared/app.dart';
 
-Future setDesktopWindow() async {
-  await DesktopWindow.setMinWindowSize(const Size(400, 400));
-  await DesktopWindow.setWindowSize(const Size(1300, 900));
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -20,5 +15,11 @@ void main() async {
     setDesktopWindow();
   }
 
+  // FirebaseAuth.instance.signOut();
   runApp(const MyApp());
+}
+
+Future setDesktopWindow() async {
+  await DesktopWindow.setMinWindowSize(const Size(400, 400));
+  await DesktopWindow.setWindowSize(const Size(1300, 900));
 }
