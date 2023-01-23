@@ -10,8 +10,8 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
+      builder: (context, asyncSnapshot) {
+        if (!asyncSnapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
               centerTitle: false,
