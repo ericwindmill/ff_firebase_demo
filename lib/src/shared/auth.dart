@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 
 import '../features/home/home.dart';
 import 'auth_gate_highlight.dart';
@@ -11,6 +14,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, asyncSnapshot) {
         if (!asyncSnapshot.hasData) {
           return Scaffold(
@@ -24,6 +28,7 @@ class AuthGate extends StatelessWidget {
               children: [
                 AuthGuardHighlight(),
                 Flexible(
+                  flex: 1,
                   child: Container(),
                 ),
               ],
