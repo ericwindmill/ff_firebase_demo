@@ -116,9 +116,6 @@ final appRouter = GoRouter(
               ),
             ),
           ),
-          // builder: (context, state) => ArtistScreen(
-          //   id: state.params['aid']!,
-          // ),
         ),
       ],
     ),
