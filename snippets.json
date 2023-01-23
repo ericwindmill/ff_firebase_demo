@@ -1,0 +1,70 @@
+{
+	"Initialize Firebase App": {
+		"prefix": "init firebase",
+		"body": [
+			"Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);"
+		]
+	},
+	"Firebase imports main": {
+		"prefix": "import firebase main",
+		"body": [
+			"import 'package:firebase_core/firebase_core.dart';",
+			"import 'package:firebase_auth/firebase_auth.dart';",
+			"import 'firebase_options.dart';",
+		]
+	},
+	"Firebase imports auth": {
+		"prefix": "import firebase auth",
+		"body": [
+			"import 'package:firebase_auth/firebase_auth.dart';",
+            "import 'package:firebase_ui_auth/firebase_ui_auth.dart';",
+            "import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';",
+		]
+	},
+	"Firebase imports home": {
+		"prefix": "import firebase home",
+		"body": [
+			"import 'package:firebase_auth/firebase_auth.dart';",
+			"import 'package:firebase_ui_auth/firebase_ui_auth.dart';",
+		]
+	},
+	"Firebase Demo Sign In": {
+		"prefix": "sign in screen",
+		"body": [
+			"child: SignInScreen(",
+			"  providers: [",
+			"    GoogleProvider(",
+			"      clientId:'1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com'),",
+			"  ]",
+		  	"),",
+		]
+	},
+	"Firebase authStateChanges": {
+		"prefix": "stream: firebase auth",
+		"body": [
+			"stream: FirebaseAuth.instance.authStateChanges(),"
+		],
+	},
+	"Firebase Current User": {
+		"prefix": "currentUser",
+		"body": [
+			"final User user = FirebaseAuth.instance.currentUser!;"
+		]
+	},
+	"User display name": {
+		"prefix": "user.displayName",
+		"body": [
+			"${user?.displayName}",
+		]
+	},
+	"Firebase UserAvatar": {
+		"prefix": "UserAvatar",
+		"body": [
+			"UserAvatar(),"
+		]
+	},
+	"Firebase SignOut": {
+		"prefix": "signOut",
+		"body": "FirebaseAuth.instance.signOut();",
+	}
+}
