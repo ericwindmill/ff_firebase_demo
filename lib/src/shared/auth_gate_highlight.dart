@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myartist/src/features/home/home.dart';
+import 'package:myartist/src/shared/views/clickable.dart';
 
 class AuthGuardHighlight extends StatelessWidget {
   const AuthGuardHighlight({Key? key}) : super(key: key);
@@ -17,7 +18,25 @@ class AuthGuardHighlight extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
-        HomeHighlight(),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: SizedBox(
+                  height: 275,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'assets/images/dashatar_guitar.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Text(
