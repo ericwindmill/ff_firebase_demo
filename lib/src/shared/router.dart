@@ -15,6 +15,8 @@ import 'views/views.dart';
 
 const _pageKey = ValueKey('_pageKey');
 const scaffoldKey = ValueKey('_scaffoldKey');
+const String googleOAuthKey =
+    '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com';
 
 final artistsProvider = ArtistsProvider();
 final playlistsProvider = PlaylistsProvider();

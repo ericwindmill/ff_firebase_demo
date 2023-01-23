@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, asyncSnapshot) {
         if (!asyncSnapshot.hasData) {
           return Scaffold(
@@ -29,8 +31,7 @@ class AuthGate extends StatelessWidget {
                   child: SignInScreen(
                     providers: [
                       GoogleProvider(
-                        clientId:
-                            '1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com',
+                        clientId: googleOAuthKey,
                       )
                     ],
                   ),
