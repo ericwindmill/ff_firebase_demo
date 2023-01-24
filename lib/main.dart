@@ -15,7 +15,6 @@ void main() async {
     setDesktopWindow();
   }
 
-  // FirebaseAuth.instance.signOut();
   runApp(const MyApp());
 }
 
