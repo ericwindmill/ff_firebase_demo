@@ -66,6 +66,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1007448672439-5hkuteua0b7qntqn1o75lo1ccijnduqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ff_firebasedemo02",
+            "certificate_hash": "c498dcd6b9e50e99d8308a520140cb441d400a40"
+          }
+        },
+        {
           "client_id": "1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -181,6 +189,30 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1007448672439-brum0s21q8860sq4jvt2e6u7vn74j25k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myartist",
+            "certificate_hash": "001e9e3f9824a60e9313fd60eaf6243e6d6b34a0"
+          }
+        },
+        {
+          "client_id": "1007448672439-eq1dq4mgidqn6fq7psm71sltqa2e11i7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myartist",
+            "certificate_hash": "21a24537dcc0e2b2b412d961bdbfffcf7330768c"
+          }
+        },
+        {
+          "client_id": "1007448672439-fmbof9llfhnd8v11ki5a7r3ptfsdhi7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myartist",
+            "certificate_hash": "c498dcd6b9e50e99d8308a520140cb441d400a40"
+          }
+        },
         {
           "client_id": "1007448672439-6d3mlihnvjf0jemmifgccqhtsdj02rk1.apps.googleusercontent.com",
           "client_type": 3
